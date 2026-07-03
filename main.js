@@ -55,6 +55,41 @@ let operator = null;
         console.log(firstNumber);
         console.log(operator);
         console.log(secondNumber);
+
+        performCalculation();
         }
      })
 
+
+
+//math function
+
+
+function performCalculation () {
+    let a = Number(firstNumber);
+    let b = Number(secondNumber);
+    let result;
+
+
+    if (operator === "+") {
+        result =  a + b;
+    }else if (operator === "-") {
+        result =  a - b;
+    }else if (operator === "÷") {
+        if (b === 0) {
+            result =  "error";
+        }else {
+            result = a/b;
+        }
+    }else if (operator === "X") {
+        result = a * b;
+    }
+
+    if (result === "error") {
+        currDisplay.textContent = "error";
+    }else if (Number.isInteger(result)){
+        currDisplay.textContent = result;
+    }else {
+        currDisplay.textContent = result.toFixed(4);
+    }
+}
