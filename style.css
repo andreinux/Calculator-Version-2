@@ -193,6 +193,20 @@ body {
 
 #calcBtn {
     font-size: 80px;
+    border-radius: 50%;
+    border: none;
+    font-weight: bold;
+    width: 140px;
+    height: 140px;
+    margin: 0 auto;
+    background-color: #114189;
+    color: #ffffff;
+}
+#calcBtn:hover {
+    background-color: #1a54a8;
+}
+#calcBtn:active {
+    transform: scale(0.97);
 }
 #subtractBtn {
     font-size: 100px;
