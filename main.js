@@ -36,6 +36,13 @@ let operator = null;
             operatorDisplay.textContent = "";
             state = "enteringfnum";
         }
+        //preventing double decimals
+          const clickedValue = e.target.textContent;
+
+         if (clickedValue === "." && currDisplay.textContent.includes(".")) {
+            return;
+         }
+         
              currDisplay.textContent += (e.target.textContent);
     
    })
