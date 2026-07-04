@@ -20,7 +20,16 @@ let operator = null;
    for(let i=0 ; i<numbers.length ; i++) {
     numbers[i].addEventListener("click" , (e)=> {
         const clickedValue = e.target.textContent;
-        
+        //for error
+        if (currDisplay.textContent === "error") {
+            state = "idle";
+            firstNumber = null;
+            secondNumber = null;
+            operator = null;
+            currDisplay.textContent ="0";
+            operatorDisplay.textContent = "";
+        }
+
         //added this to fix bugs due to new feature: erase
         if (currDisplay.textContent === "0"){
             currDisplay.textContent = ""
@@ -66,6 +75,8 @@ let operator = null;
 
       for (let i=0 ; i<operators.length ; i++) {
         operators[i].addEventListener("click" , (e)=> {
+             if (currDisplay.textContent === "error") return;
+
             if (state === 'enteringsnum') {
                 secondNumber = currDisplay.textContent;
                 operator = operatorDisplay.textContent;
@@ -147,6 +158,15 @@ reset.addEventListener("click" , ()=> {
 //erase handling
 
 erase.addEventListener("click" , ()=> {
+     if (currDisplay.textContent === "error") {
+        operator = null;
+        firstNumber = null;
+        secondNumber = null;
+        currDisplay.textContent = "0";
+        operatorDisplay.textContent = "";
+        state="idle";
+        return;
+     }
 
     if (state === "showingResult"){
         state = "enteringfnum";
@@ -164,9 +184,7 @@ erase.addEventListener("click" , ()=> {
     else {
        currDisplay.textContent = currDisplay.textContent.slice(0,-1);
     }
-    if (state === "showingResult") {
-
-    }
+    
 })
 
 
