@@ -101,3 +101,15 @@ function performCalculation () {
         currDisplay.textContent = result.toFixed(3);
     }
 }
+
+
+//clear listener
+
+reset.addEventListener("click" , ()=> {
+    operator = null;
+    firstNumber = null;
+    secondNumber = null;
+    currDisplay.textContent = "0";
+    operatorDisplay.textContent = "";
+    state = "idle";
+})
