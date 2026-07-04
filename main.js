@@ -20,6 +20,11 @@ let operator = null;
    for(let i=0 ; i<numbers.length ; i++) {
     numbers[i].addEventListener("click" , (e)=> {
         const clickedValue = e.target.textContent;
+        
+        //added this to fix bugs due to new feature: erase
+        if (currDisplay.textContent === "0"){
+            currDisplay.textContent = ""
+        }
 
         if (state === "idle") {
             if (clickedValue != "."){
@@ -83,12 +88,12 @@ let operator = null;
         state = "showingResult";
         operator = operatorDisplay.textContent;
         secondNumber = currDisplay.textContent;
-        console.log(state);
-        console.log(firstNumber);
-        console.log(operator);
-        console.log(secondNumber);
 
         performCalculation();
+        }
+
+        if (state === "showingResult"){
+            operatorDisplay.textContent ="";
         }
      })
 
@@ -137,3 +142,31 @@ reset.addEventListener("click" , ()=> {
     operatorDisplay.textContent = "";
     state = "idle";
 })
+
+
+//erase handling
+
+erase.addEventListener("click" , ()=> {
+
+    if (state === "showingResult"){
+        state = "enteringfnum";
+        operator = null;
+        firstNumber = null;
+        secondNumber = null;
+        operatorDisplay.textContent = "";
+    }
+
+     if (currDisplay.textContent.length === 1){
+        currDisplay.textContent = "0";
+    } else if (currDisplay.textContent === "0") {
+        return;
+    }
+    else {
+       currDisplay.textContent = currDisplay.textContent.slice(0,-1);
+    }
+    if (state === "showingResult") {
+
+    }
+})
+
+
