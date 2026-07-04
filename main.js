@@ -28,6 +28,14 @@ let operator = null;
             state = "enteringsnum";
             currDisplay.textContent = "";   
         }
+        if (state === "showingResult"){
+            operator = null;
+            firstNumber = null;
+            secondNumber = null;
+            currDisplay.textContent = "";
+            operatorDisplay.textContent = "";
+            state = "enteringfnum";
+        }
              currDisplay.textContent += (e.target.textContent);
     
    })
