@@ -37,6 +37,14 @@ let operator = null;
 
       for (let i=0 ; i<operators.length ; i++) {
         operators[i].addEventListener("click" , (e)=> {
+            if (state === 'enteringsnum') {
+                secondNumber = currDisplay.textContent;
+                operator = operatorDisplay.textContent;
+                console.log(typeof firstNumber , typeof secondNumber);
+                performCalculation();
+                state = "showingResult";
+            }
+
             state = "operatorSelected";
             firstNumber = currDisplay.textContent;
             operatorDisplay.textContent = "";
@@ -87,9 +95,9 @@ function performCalculation () {
 
     if (result === "error") {
         currDisplay.textContent = "error";
-    }else if (Number.isInteger(result)){
+    }else if (Number.isInteger(result)){ 
         currDisplay.textContent = result;
     }else {
-        currDisplay.textContent = result.toFixed(4);
+        currDisplay.textContent = result.toFixed(3);
     }
 }
