@@ -19,15 +19,24 @@ let operator = null;
 
    for(let i=0 ; i<numbers.length ; i++) {
     numbers[i].addEventListener("click" , (e)=> {
+        const clickedValue = e.target.textContent;
 
         if (state === "idle") {
-            currDisplay.textContent="";
+            if (clickedValue != "."){
+              currDisplay.textContent="";
+            }
             state = "enteringfnum";
         }
+
         if (state === "operatorSelected"){
+            if (clickedValue === "."){
+             currDisplay.textContent = "0."
+            }else{
+             currDisplay.textContent = "";
+            }  
             state = "enteringsnum";
-            currDisplay.textContent = "";   
         }
+
         if (state === "showingResult"){
             operator = null;
             firstNumber = null;
@@ -37,7 +46,7 @@ let operator = null;
             state = "enteringfnum";
         }
         //preventing double decimals
-          const clickedValue = e.target.textContent;
+          
 
          if (clickedValue === "." && currDisplay.textContent.includes(".")) {
             return;
