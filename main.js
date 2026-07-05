@@ -15,11 +15,10 @@ let secondNumber = null;
 let operator = null;
 
 //button event handler 
-
-
    for(let i=0 ; i<numbers.length ; i++) {
     numbers[i].addEventListener("click" , (e)=> {
-        const clickedValue = e.target.textContent;
+
+
         //for error
         if (currDisplay.textContent === "error") {
             state = "idle";
@@ -34,6 +33,8 @@ let operator = null;
         if (currDisplay.textContent === "0"){
             currDisplay.textContent = ""
         }
+         
+        const clickedValue = e.target.textContent;
 
         if (state === "idle") {
             if (clickedValue != "."){
@@ -65,9 +66,12 @@ let operator = null;
          if (clickedValue === "." && currDisplay.textContent.includes(".")) {
             return;
          }
-         
+         //input limit 
+         if (currDisplay.textContent.length >= 12) return;
+
              currDisplay.textContent += (e.target.textContent);
     
+             updateDisplay();
    })
 }
 
@@ -80,7 +84,6 @@ let operator = null;
             if (state === 'enteringsnum') {
                 secondNumber = currDisplay.textContent;
                 operator = operatorDisplay.textContent;
-                console.log(typeof firstNumber , typeof secondNumber);
                 performCalculation();
                 state = "showingResult";
             }
@@ -106,6 +109,7 @@ let operator = null;
         if (state === "showingResult"){
             operatorDisplay.textContent ="";
         }
+         
      })
 
 
@@ -140,6 +144,7 @@ function performCalculation () {
     }else {
         currDisplay.textContent = result.toFixed(3);
     }
+     updateDisplay();
 }
 
 
@@ -152,6 +157,8 @@ reset.addEventListener("click" , ()=> {
     currDisplay.textContent = "0";
     operatorDisplay.textContent = "";
     state = "idle";
+
+    updateDisplay();
 })
 
 
@@ -184,7 +191,19 @@ erase.addEventListener("click" , ()=> {
     else {
        currDisplay.textContent = currDisplay.textContent.slice(0,-1);
     }
-    
+     updateDisplay();  
 })
 
 
+
+function updateDisplay () { 
+    if (currDisplay.textContent.length >= 18) {
+        currDisplay.style.fontSize="50px";
+    }else if (currDisplay.textContent.length >= 13) {
+        currDisplay.style.fontSize="60px";
+    }else if (currDisplay.textContent.length >= 8){
+        currDisplay.style.fontSize="80px";
+    }else {
+        currDisplay.style.fontSize="100px";
+    }
+}
