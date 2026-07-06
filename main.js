@@ -31,7 +31,7 @@ let operator = null;
 
         //added this to fix bugs due to new feature: erase
         if (currDisplay.textContent === "0"){
-            currDisplay.textContent = ""
+            currDisplay.textContent = "";
         }
          
         const clickedValue = e.target.textContent;
@@ -59,6 +59,14 @@ let operator = null;
             currDisplay.textContent = "";
             operatorDisplay.textContent = "";
             state = "enteringfnum";
+        }
+
+        if (state === "enteringsnum" && currDisplay.textContent === "-0"){
+            currDisplay.textContent = "-";
+        } 
+
+        if (state === "enteringfnum" && currDisplay.textContent === "-0"){
+            currDisplay.textContent = "-";            
         }
         //preventing double decimals
           
@@ -191,6 +199,7 @@ erase.addEventListener("click" , ()=> {
     else {
        currDisplay.textContent = currDisplay.textContent.slice(0,-1);
     }
+    console.log(state);
      updateDisplay();  
 })
 
@@ -207,3 +216,25 @@ function updateDisplay () {
         currDisplay.style.fontSize="100px";
     }
 }
+
+//sign change button implementation 
+
+let signChange = document.querySelector("#sign-change") 
+
+signChange.addEventListener("click" , ()=> {
+    if (state === "operatorSelected"){
+        state = "enteringsnum";
+        currDisplay.textContent = "-0";
+    }else if (state === "idle") {
+        currDisplay.textContent = "-0"
+        state = "enteringfnum";
+    }else if (state === "enteringsnum" && currDisplay.textContent === "0"){
+        currDisplay.textContent = "-0";
+    }else if (state === "enteringfnum" && currDisplay.textContent === "0"){
+        currDisplay.textContent = "-0";
+    }
+    
+    else {
+    currDisplay.textContent = String(-Number(currDisplay.textContent));
+    }
+})

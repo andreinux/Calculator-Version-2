@@ -179,7 +179,7 @@ body {
 }
 
 #btn0 {
-    width: 400px;
+    width: 280px;
     border-radius: 53px;
     margin-left: 10px;
     font-size: 100px;
@@ -241,4 +241,22 @@ body {
     font-family: "Poppins";
     font-weight: bold;
     font-size: 80px;
+}
+
+#sign-change {
+    width: 140px;
+    height: 140px;      
+    border-radius: 50%;
+    border: none;
+    font-weight: bold;
+    font-size: 50px;
+    background-color: #333333;
+    color: #ffffff;
+    font-family: 'Poppins';
+}
+#sign-change:hover {
+    background-color: #4e5265;
+}
+#sign-change:active {
+    transform: scale(0.97);
 }
