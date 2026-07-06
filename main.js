@@ -17,7 +17,22 @@ let operator = null;
 //button event handler 
    for(let i=0 ; i<numbers.length ; i++) {
     numbers[i].addEventListener("click" , (e)=> {
+        const clickedValue = e.target.textContent;
+        console.log(state);
 
+       //0 to decimal UI
+       if (state === "idle" && currDisplay.textContent === "0" && clickedValue === "."){
+        state = "enteringfnum";
+        currDisplay.textContent = "0.";
+       }else if (state === "enteringfnum" && currDisplay.textContent === "0" && clickedValue === "."){
+        currDisplay.textContent = "0.";
+       }else if (state === "enteringsnum" && currDisplay.textContent === "0" && clickedValue === "."){
+        currDisplay.textContent = "0.";
+       }else if (state === "enteringfnum" && currDisplay.textContent === "-0" && clickedValue === "."){
+        currDisplay.textContent = "-0.";
+       }else if (state === "enteringsnum" && currDisplay.textContent === "-0" && clickedValue === "."){
+        currDisplay.textContent = "-0."
+       }
 
         //for error
         if (currDisplay.textContent === "error") {
@@ -34,7 +49,7 @@ let operator = null;
             currDisplay.textContent = "";
         }
          
-        const clickedValue = e.target.textContent;
+        
 
         if (state === "idle") {
             if (clickedValue != "."){
@@ -42,6 +57,7 @@ let operator = null;
             }
             state = "enteringfnum";
         }
+     
 
         if (state === "operatorSelected"){
             if (clickedValue === "."){
@@ -68,6 +84,8 @@ let operator = null;
         if (state === "enteringfnum" && currDisplay.textContent === "-0"){
             currDisplay.textContent = "-";            
         }
+         
+
         //preventing double decimals
           
 
@@ -167,6 +185,7 @@ reset.addEventListener("click" , ()=> {
     state = "idle";
 
     updateDisplay();
+    console.log(state);
 })
 
 
@@ -222,6 +241,7 @@ function updateDisplay () {
 let signChange = document.querySelector("#sign-change") 
 
 signChange.addEventListener("click" , ()=> {
+    console.log(state);
     if (state === "operatorSelected"){
         state = "enteringsnum";
         currDisplay.textContent = "-0";
@@ -232,9 +252,15 @@ signChange.addEventListener("click" , ()=> {
         currDisplay.textContent = "-0";
     }else if (state === "enteringfnum" && currDisplay.textContent === "0"){
         currDisplay.textContent = "-0";
+    }else if (state === "enteringfnum" && currDisplay.textContent === "0."){
+        currDisplay.textContent = "-0.";
+    }else if (state === "enteringsnum" && currDisplay.textContent === "0."){
+        currDisplay.textContent = "-0.";
     }
     
     else {
     currDisplay.textContent = String(-Number(currDisplay.textContent));
     }
 })
+
+//c .
